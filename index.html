@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>キャンパスマッチナビ 見本版</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
+<style>
+/* 本番アプリの public/css/app.css をそのまま使う（デジタル庁デザインシステムの色と文字）。明るい表示のみ */
+:root { color-scheme: light; }
+/* キャンパスマッチナビ — デジタル庁デザインシステム（DADS）の色・文字・余白に合わせたスタイル */
+:root {
+  --blue-900: #000060;
+  --blue-800: #00118F;
+  --blue-700: #0017C1;
+  --blue-50: #E8F1FE;
+  --lightblue: #008BF2;
+  --orange: #C74700;
+  --orange-50: #FFEEE2;
+  --green: #197A4B;
+  --green-50: #E6F5EC;
+  --red: #CE0000;
+  --red-50: #FDEEEE;
+  --gray-1000: #1A1A1A;
+  --gray-800: #333333;
+  --gray-600: #666666;
+  --gray-500: #949494;
+  --gray-300: #CCCCCC;
+  --gray-100: #F2F2F2;
+  --white: #FFFFFF;
+  --radius: 8px;
+  --focus: 0 0 0 2px #fff, 0 0 0 4px #000000;
+  --font: 'Noto Sans JP', 'Noto Sans CJK JP', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', Meiryo, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; font-family: var(--font); font-size: 16px; line-height: 1.75; letter-spacing: .02em;
+  color: var(--gray-1000); background: var(--white);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+img, svg { max-width: 100%; }
+a { color: var(--blue-700); text-underline-offset: 3px; }
+a:hover { color: var(--blue-900); text-decoration-thickness: 3px; }
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: 4px; }
+h1, h2, h3 { line-height: 1.5; letter-spacing: .02em; margin: 0 0 .5em; }
+h1 { font-size: 32px; }
+h2 { font-size: 24px; margin-top: 40px; }
+h3 { font-size: 20px; margin-top: 24px; }
+p { margin: 0 0 1em; }
+.skip { position: absolute; left: -9999px; top: 0; background: var(--white); padding: 8px 16px; z-index: 10; }
+.skip:focus { left: 16px; }
+
+.wrap { width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+.main { flex: 1; padding-top: 32px; padding-bottom: 64px; }
+.narrow { max-width: 640px; }
+
+/* ヘッダー・フッター */
+.site-header { border-bottom: 1px solid var(--gray-300); background: var(--white); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--gray-1000); text-decoration: none; }
+.brand-mark { width: 28px; height: 28px; border-radius: 7px; background: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230017C1%22%2F%3E%3Ccircle%20cx%3D%2211%22%20cy%3D%2213%22%20r%3D%224%22%20fill%3D%22%23fff%22%2F%3E%3Ccircle%20cx%3D%2221%22%20cy%3D%2213%22%20r%3D%224%22%20fill%3D%22%23fff%22%20opacity%3D%22.7%22%2F%3E%3Cpath%20d%3D%22M5%2026c1-4%203.5-6%206-6s5%202%206%206M15%2026c1-4%203.5-6%206-6s5%202%206%206%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222.4%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E") center/cover; }
+.nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 15px; }
+.nav a { color: var(--gray-800); text-decoration: none; padding: 4px 0; border-bottom: 3px solid transparent; }
+.nav a:hover { color: var(--blue-700); }
+.nav a[aria-current="page"] { color: var(--blue-700); border-bottom-color: var(--blue-700); font-weight: 700; }
+.site-footer { background: var(--gray-100); padding: 24px 0; font-size: 14px; }
+.footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.footer-inner nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.footer-inner p { margin: 0; }
+
+/* 文字の補助 */
+.muted { color: var(--gray-600); }
+.small { font-size: 14px; }
+.lead { font-size: 18px; color: var(--gray-800); }
+.num { font-feature-settings: 'tnum'; }
+.eyebrow { font-size: 14px; font-weight: 700; color: var(--blue-700); margin-bottom: 4px; }
+.inline { display: inline; }
+
+/* ボタン */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 10px 24px; border-radius: var(--radius); border: 1px solid var(--blue-700);
+  background: var(--blue-700); color: var(--white); font: inherit; font-weight: 700; font-size: 16px;
+  text-decoration: none; cursor: pointer; letter-spacing: .02em;
+}
+.btn:hover { background: var(--blue-900); border-color: var(--blue-900); color: var(--white); text-decoration: underline; }
+.btn:disabled { background: var(--gray-300); border-color: var(--gray-300); color: var(--gray-600); cursor: not-allowed; }
+.btn-secondary { background: var(--white); color: var(--blue-700); }
+.btn-secondary:hover { background: var(--blue-50); color: var(--blue-900); }
+.btn-danger { background: var(--white); color: var(--red); border-color: var(--red); }
+.btn-danger:hover { background: var(--red-50); color: var(--red); border-color: var(--red); }
+.btn-sm { min-height: 36px; padding: 4px 14px; font-size: 14px; }
+.btn-block { width: 100%; }
+.link-btn { background: none; border: 0; padding: 4px 0; font: inherit; font-size: 15px; color: var(--gray-800); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.link-btn:hover { color: var(--blue-700); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 24px; }
+
+/* フォーム */
+.field { margin-bottom: 24px; }
+.field > label, .field > .label, fieldset > legend { display: block; font-weight: 700; margin-bottom: 6px; }
+.req { display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 700; color: var(--red); }
+.hint { display: block; font-size: 14px; color: var(--gray-600); margin-bottom: 6px; font-weight: 400; }
+input[type=text], input[type=email], input[type=password], input[type=number], input[type=date], input[type=time], input[type=search], select, textarea {
+  width: 100%; max-width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid var(--gray-600); border-radius: var(--radius);
+  font: inherit; color: var(--gray-1000); background: var(--white);
+}
+textarea { min-height: 112px; resize: vertical; }
+input:hover, select:hover, textarea:hover { border-color: var(--gray-1000); }
+input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--gray-1000); }
+fieldset { border: 0; margin: 0 0 24px; padding: 0; min-width: 0; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.choice { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; cursor: pointer; }
+.choice input { width: 22px; height: 22px; accent-color: var(--blue-700); margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.chip span { display: inline-block; padding: 6px 14px; border: 1px solid var(--gray-600); border-radius: 999px; font-size: 14px; background: var(--white); }
+.chip input:checked + span { background: var(--blue-700); border-color: var(--blue-700); color: var(--white); font-weight: 700; }
+.chip input:focus-visible + span { box-shadow: var(--focus); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 16px; }
+@media (max-width: 640px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+/* お知らせ */
+.notice { padding: 14px 18px; border-radius: var(--radius); margin-bottom: 24px; border-left: 6px solid; }
+.notice-success { background: var(--green-50); border-color: var(--green); }
+.notice-error { background: var(--red-50); border-color: var(--red); }
+.notice-info { background: var(--blue-50); border-color: var(--blue-700); }
+.notice-warn { background: var(--orange-50); border-color: var(--orange); }
+.notice p:last-child { margin-bottom: 0; }
+
+/* カード・パネル */
+.card { border: 1px solid var(--gray-300); border-radius: 12px; padding: 24px; background: var(--white); }
+.card + .card { margin-top: 16px; }
+.panel { background: var(--gray-100); border-radius: 12px; padding: 24px; }
+.stack > * + * { margin-top: 16px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.cards .card + .card { margin-top: 0; }
+
+/* 数字のタイル */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 16px 0 24px; }
+.tile { border: 1px solid var(--gray-300); border-radius: 12px; padding: 16px 18px; }
+.tile .k { font-size: 14px; color: var(--gray-600); }
+.tile .v { font-size: 32px; font-weight: 700; line-height: 1.3; font-feature-settings: 'tnum'; }
+.tile .v small { font-size: 15px; font-weight: 400; margin-left: 4px; }
+.tile.alert { border-color: var(--orange); background: var(--orange-50); }
+a.tile { color: inherit; text-decoration: none; display: block; }
+a.tile:hover { border-color: var(--blue-700); }
+
+/* ラベル */
+.tag { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 13px; font-weight: 700; line-height: 1.6; border: 1px solid currentColor; white-space: nowrap; }
+.tag-blue { color: var(--blue-700); background: var(--blue-50); border-color: transparent; }
+.tag-orange { color: var(--orange); background: var(--orange-50); border-color: transparent; }
+.tag-green { color: var(--green); background: var(--green-50); border-color: transparent; }
+.tag-gray { color: var(--gray-800); background: var(--gray-100); border-color: transparent; }
+.tag-red { color: var(--red); background: var(--red-50); border-color: transparent; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+
+/* 先輩カード */
+.person { display: flex; flex-direction: column; }
+.person h3 { margin: 4px 0 0; font-size: 20px; }
+.person .meta { font-size: 14px; color: var(--gray-600); }
+.person .topics { font-size: 15px; margin: 8px 0 16px; }
+.person .foot { margin-top: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-50); color: var(--blue-700); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; flex: none; }
+.person-head { display: flex; gap: 12px; align-items: center; }
+
+/* 表 */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--gray-300); border-radius: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--gray-300); vertical-align: top; }
+thead th { background: var(--gray-100); font-weight: 700; font-size: 14px; white-space: nowrap; }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: 0; }
+td.num, th.num { text-align: right; }
+.compare th[scope=row] { width: 180px; background: var(--gray-100); font-size: 14px; }
+
+/* 一覧・予約 */
+.list { list-style: none; margin: 0; padding: 0; }
+.list > li { border-bottom: 1px solid var(--gray-300); padding: 16px 0; }
+.list > li:first-child { border-top: 1px solid var(--gray-300); }
+.booking { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; align-items: start; }
+.booking .when { font-weight: 700; font-size: 18px; }
+@media (max-width: 640px) { .booking { grid-template-columns: 1fr; } }
+details { margin-top: 8px; }
+details > summary { cursor: pointer; color: var(--blue-700); font-size: 15px; }
+details[open] > summary { margin-bottom: 12px; }
+.slot-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.slot-pick label { display: flex; gap: 10px; align-items: center; border: 1px solid var(--gray-600); border-radius: var(--radius); padding: 10px 14px; cursor: pointer; }
+.slot-pick input { width: 20px; height: 20px; accent-color: var(--blue-700); }
+.slot-pick label:has(input:checked) { border-color: var(--blue-700); background: var(--blue-50); box-shadow: inset 0 0 0 1px var(--blue-700); }
+
+/* 検索の絞り込み */
+.filters { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: end; margin-bottom: 24px; }
+.filters .field { margin: 0; }
+.filters label { font-size: 14px; font-weight: 700; display: block; margin-bottom: 4px; }
+@media (max-width: 900px) { .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .filters { grid-template-columns: 1fr; } }
+
+/* トップ */
+.hero { background: var(--blue-50); border-radius: 16px; padding: 48px 40px; margin-bottom: 40px; }
+.hero h1 { font-size: 36px; }
+.hero .lead { max-width: 640px; }
+@media (max-width: 640px) { .hero { padding: 32px 20px; } .hero h1 { font-size: 28px; } h1 { font-size: 26px; } }
+.steps { counter-reset: step; list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.steps li { counter-increment: step; border: 1px solid var(--gray-300); border-radius: 12px; padding: 20px; }
+.steps li::before { content: counter(step); display: inline-flex; width: 32px; height: 32px; border-radius: 50%; background: var(--blue-700); color: #fff; font-weight: 700; align-items: center; justify-content: center; margin-bottom: 8px; }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 720px) { .split { grid-template-columns: 1fr; } }
+
+/* データの棒 */
+.bar { height: 12px; background: var(--gray-100); border-radius: 6px; overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--blue-700); }
+
+/* 文書 */
+.doc h2 { font-size: 20px; margin-top: 32px; }
+.doc ol, .doc ul { padding-left: 1.4em; }
+.doc li { margin-bottom: 6px; }
+.draft-note { border: 2px dashed var(--orange); border-radius: 8px; padding: 12px 16px; color: var(--orange); font-weight: 700; margin-bottom: 24px; }
+
+/* メール本文 */
+pre.mail { white-space: pre-wrap; word-break: break-all; background: var(--gray-100); padding: 12px; border-radius: 8px; font-size: 13px; font-family: inherit; }
+
+/* 印刷 */
+.print-sheet { max-width: 680px; margin: 0 auto; }
+.print-code { font-size: 44px; font-weight: 700; letter-spacing: .12em; border: 3px solid var(--gray-1000); border-radius: 12px; padding: 16px; text-align: center; margin: 16px 0; font-feature-settings: 'tnum'; }
+@media print {
+  .site-header, .site-footer, .no-print, .skip { display: none !important; }
+  .main { padding: 0; }
+  body { font-size: 12pt; }
+}
+
+/* 比較シート：スマートフォンでは横にスクロールし、項目名の列は左に固定する */
+@media (max-width: 640px) {
+  .compare th[scope=row] { width: auto; min-width: 104px; position: sticky; left: 0; z-index: 1; }
+  .compare td, .compare thead th:not(:first-child) { min-width: 220px; }
+  .compare thead th:first-child { position: sticky; left: 0; z-index: 2; }
+}
+
+/* 見本版だけの帯 */
+.demo-bar { background: var(--blue-900); color: #fff; font-size: 13px; line-height: 1.6; padding: 8px max(16px, env(safe-area-inset-right, 0px)) 8px max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.demo-bar p { margin: 0; flex: 1 1 240px; }
+.demo-reset { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.7); border-radius: 6px; padding: 4px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+.demo-reset:hover { background: rgba(255,255,255,.15); }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+<script>
+var PREFS = [{"code":1,"name":"北海道"},{"code":2,"name":"青森県"},{"code":3,"name":"岩手県"},{"code":4,"name":"宮城県"},{"code":5,"name":"秋田県"},{"code":6,"name":"山形県"},{"code":7,"name":"福島県"},{"code":8,"name":"茨城県"},{"code":9,"name":"栃木県"},{"code":10,"name":"群馬県"},{"code":11,"name":"埼玉県"},{"code":12,"name":"千葉県"},{"code":13,"name":"東京都"},{"code":14,"name":"神奈川県"},{"code":15,"name":"新潟県"},{"code":16,"name":"富山県"},{"code":17,"name":"石川県"},{"code":18,"name":"福井県"},{"code":19,"name":"山梨県"},{"code":20,"name":"長野県"},{"code":21,"name":"岐阜県"},{"code":22,"name":"静岡県"},{"code":23,"name":"愛知県"},{"code":24,"name":"三重県"},{"code":25,"name":"滋賀県"},{"code":26,"name":"京都府"},{"code":27,"name":"大阪府"},{"code":28,"name":"兵庫県"},{"code":29,"name":"奈良県"},{"code":30,"name":"和歌山県"},{"code":31,"name":"鳥取県"},{"code":32,"name":"島根県"},{"code":33,"name":"岡山県"},{"code":34,"name":"広島県"},{"code":35,"name":"山口県"},{"code":36,"name":"徳島県"},{"code":37,"name":"香川県"},{"code":38,"name":"愛媛県"},{"code":39,"name":"高知県"},{"code":40,"name":"福岡県"},{"code":41,"name":"佐賀県"},{"code":42,"name":"長崎県"},{"code":43,"name":"熊本県"},{"code":44,"name":"大分県"},{"code":45,"name":"宮崎県"},{"code":46,"name":"鹿児島県"},{"code":47,"name":"沖縄県"}];
+var T = {};
+T["partials/head"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append("<div class=\"demo-bar\"><p>見本版：本番アプリの高校生の画面を、このページの中だけで動かしています。先輩・高校は見本のデータで、実際の予約やメール送信は行われません。</p><button type=\"button\" class=\"demo-reset\" data-reset>最初からやり直す</button></div>\n<a class=\"skip\" href=\"#main\">本文へ移動</a>\n<header class=\"site-header\">\n  <div class=\"wrap header-inner\">\n    <a class=\"brand\" href=\"/\"><span class=\"brand-mark\" aria-hidden=\"true\"></span>")
+    ; __append(escapeFn( config.serviceName ))
+    ; __append("</a>\n    ")
+    ;  if (user) { 
+    ; __append("\n    <nav class=\"nav\" aria-label=\"メインメニュー\">\n      ")
+    ;  const items = {
+        student: [['/student','マイページ'],['/student/search','先輩をさがす'],['/student/bookings','予約'],['/student/compare','比較シート']],
+        ambassador: [['/ambassador','先輩のページ'],['/ambassador/profile','プロフィール']],
+        teacher: [['/teacher','先生のページ']],
+        admin: [['/admin','運営'],['/admin/ambassadors','審査'],['/admin/reports','報告'],['/admin/schools','高校'],['/admin/universities','大学'],['/admin/stats','統計'],['/admin/users','利用者']],
+      }[user.role] || []; 
+    ; __append("\n      ")
+    ;  for (const [href, label] of items) { 
+    ; __append("\n        <a href=\"")
+    ; __append(escapeFn( href ))
+    ; __append("\"")
+    ;  if (path === href) { 
+    ; __append(" aria-current=\"page\"")
+    ;  } 
+    ; __append(">")
+    ; __append(escapeFn( label ))
+    ; __append("</a>\n      ")
+    ;  } 
+    ; __append("\n      <a href=\"/account\">アカウント</a>\n      <form method=\"post\" action=\"/logout\" class=\"inline\"><input type=\"hidden\" name=\"_csrf\" value=\"")
+    ; __append(escapeFn( csrf ))
+    ; __append("\"><button class=\"link-btn\">ログアウト</button></form>\n    </nav>\n    ")
+    ;  } else { 
+    ; __append("\n    <nav class=\"nav\" aria-label=\"メインメニュー\">\n      <a href=\"/login\">ログイン</a>\n    </nav>\n    ")
+    ;  } 
+    ; __append("\n  </div>\n</header>\n<main id=\"main\" class=\"wrap main\">\n")
+    ;  if (flash) { 
+    ; __append("\n  <div class=\"notice notice-")
+    ; __append(escapeFn( flash.type ))
+    ; __append("\" role=\"")
+    ; __append(escapeFn( flash.type === 'error' ? 'alert' : 'status' ))
+    ; __append("\">")
+    ; __append(escapeFn( flash.text ))
+    ; __append("</div>\n")
+    ;  } 
+    ; __append("\n")
+
+} return __output; };
+T["partials/foot"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append("</main>\n<footer class=\"site-footer\">\n  <div class=\"wrap footer-inner\">\n    <nav aria-label=\"サイトの情報\">\n      <a href=\"/guidelines\">安心して使うためのルール</a>\n      <a href=\"/terms\">利用規約</a>\n      <a href=\"/privacy\">プライバシーポリシー</a>\n    </nav>\n    <p class=\"muted\">問い合わせ：")
+    ; __append(escapeFn( config.operatorContact ))
+    ; __append("</p>\n  </div>\n</footer>\n\n")
+
+} return __output; };
+T["partials/csrf"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append("<input type=\"hidden\" name=\"_csrf\" value=\"")
+    ; __append(escapeFn( csrf ))
+    ; __append("\">\n")
+
+} return __output; };
+T["partials/error"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ;  if (typeof error !== 'undefined' && error) { 
+    ; __append("<div class=\"notice notice-error\" role=\"alert\">")
+    ; __append(escapeFn( error ))
+    ; __append("</div>")
+    ;  } 
+    ; __append("\n")
+
+} return __output; };
+T["partials/status-banner"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ;  if (user.status === 'pending_email') { 
+    ; __append("\n  <div class=\"notice notice-warn\">\n    <p><strong>メールアドレスの確認がまだです。</strong> 登録したアドレス（")
+    ; __append(escapeFn( user.email ))
+    ; __append("）に届いたメールのリンクを開いてください。</p>\n    <form method=\"post\" action=\"/")
+    ; __append(escapeFn( user.role ))
+    ; __append("/resend-verify\">")
+    ; __append( include('csrf') )
+    ; __append("<button class=\"btn btn-sm btn-secondary\" type=\"submit\">確認メールを送り直す</button></form>\n  </div>\n")
+    ;  } else if (user.status === 'pending_consent') { 
+    ; __append("\n  <div class=\"notice notice-warn\">\n    <p><strong>保護者の方の同意を待っています。</strong> 同意が届くと、面談を予約できるようになります。先輩をさがすことは今でもできます。</p>\n    <form method=\"post\" action=\"/student/resend-consent\">")
+    ; __append( include('csrf') )
+    ; __append("<button class=\"btn btn-sm btn-secondary\" type=\"submit\">保護者の方にもう一度メールを送る</button></form>\n  </div>\n")
+    ;  } else if (user.status === 'pending_review') { 
+    ; __append("\n  <div class=\"notice notice-info\">\n    <p><strong>研修と承認を待っています。</strong> 運営事務局から研修（オンライン・約60分）の案内が届きます。研修を修了すると承認され、面談の日時を登録できるようになります。</p>\n  </div>\n")
+    ;  } 
+    ; __append("\n")
+
+} return __output; };
+T["partials/person-card"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append("<article class=\"card person\">\n  <div class=\"person-head\">\n    <span class=\"avatar\" aria-hidden=\"true\">")
+    ; __append(escapeFn( a.display_name.slice(0,1) ))
+    ; __append("</span>\n    <div>\n      <p class=\"meta\" style=\"margin:0\">")
+    ; __append(escapeFn( a.university ))
+    ; __append("・")
+    ; __append(escapeFn( a.year ))
+    ; __append("年</p>\n      <h3>")
+    ; __append(escapeFn( a.display_name ))
+    ; __append(" さん</h3>\n    </div>\n  </div>\n  <div class=\"tags\">\n    <span class=\"tag ")
+    ; __append(escapeFn( a.is_local ? 'tag-green' : 'tag-blue' ))
+    ; __append("\">")
+    ; __append(escapeFn( a.is_local ? '地元の大学' : '県外の大学' ))
+    ; __append("</span>\n    <span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.home_pref ))
+    ; __append("出身</span>\n    <span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.hs_kind ))
+    ; __append("高校</span>\n    <span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.exam_type ))
+    ; __append("</span>\n    ")
+    ;  if (a.uses_scholarship) { 
+    ; __append("<span class=\"tag tag-orange\">奨学金あり</span>")
+    ;  } 
+    ; __append("\n  </div>\n  <p class=\"meta\" style=\"margin:0\">")
+    ; __append(escapeFn( a.faculty ))
+    ; __append("（")
+    ; __append(escapeFn( a.field ))
+    ; __append("）</p>\n  <p class=\"topics\">")
+    ; __append(escapeFn( a.topics || '　' ))
+    ; __append("</p>\n  <div class=\"foot\">\n    <a class=\"btn btn-sm\" href=\"/student/ambassadors/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\">くわしく見る・予約</a>\n    <form method=\"post\" action=\"/student/compare/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\" class=\"inline\">\n      ")
+    ; __append( include('csrf') )
+    ; __append("<input type=\"hidden\" name=\"back\" value=\"")
+    ; __append(escapeFn( back ))
+    ; __append("\">\n      <button class=\"btn btn-sm btn-secondary\" type=\"submit\">")
+    ; __append(escapeFn( inCompare ? '比較から外す' : '比較に追加' ))
+    ; __append("</button>\n    </form>\n  </div>\n</article>\n")
+
+} return __output; };
+T["student/home"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<h1>")
+    ; __append(escapeFn( user.display_name ))
+    ; __append(" さんのマイページ</h1>\n<p class=\"muted\">")
+    ; __append(escapeFn( student.school_name ))
+    ; __append("・")
+    ; __append(escapeFn( student.grade ))
+    ; __append("年（")
+    ; __append(escapeFn( student.home_pref ))
+    ; __append("）</p>\n")
+    ; __append( include('../partials/status-banner') )
+    ; __append("\n\n<h2>次の面談</h2>\n")
+    ;  if (!upcoming.length) { 
+    ; __append("\n  <div class=\"panel\">\n    <p>予約している面談はありません。</p>\n    <a class=\"btn\" href=\"/student/search\">同じ県出身の先輩をさがす</a>\n  </div>\n")
+    ;  } else { 
+    ; __append("\n  <ul class=\"list\">\n    ")
+    ;  for (const b of upcoming) { 
+    ; __append("\n      <li><span class=\"when\"><strong>")
+    ; __append(escapeFn( lib.formatRange(b.starts_at, b.duration_min) ))
+    ; __append("</strong></span><br>")
+    ; __append(escapeFn( b.university ))
+    ; __append("　")
+    ; __append(escapeFn( b.display_name ))
+    ; __append(" さん</li>\n    ")
+    ;  } 
+    ; __append("\n  </ul>\n  <p class=\"actions\"><a class=\"btn btn-secondary\" href=\"/student/bookings\">予約をすべて見る</a></p>\n")
+    ;  } 
+    ; __append("\n\n<h2>できること</h2>\n<div class=\"cards\">\n  <a class=\"card tile\" href=\"/student/search\"><p class=\"k\">さがす</p><p style=\"margin:0\"><strong>先輩をさがす</strong><br><span class=\"small muted\">地元・県外、分野、奨学金で絞り込み</span></p></a>\n  <a class=\"card tile\" href=\"/student/compare\"><p class=\"k\">くらべる</p><p style=\"margin:0\"><strong>比較シート</strong><br><span class=\"small muted\">最大3人の回答を同じ項目で並べる</span></p></a>\n  <a class=\"card tile\" href=\"/guidelines\"><p class=\"k\">はじめに</p><p style=\"margin:0\"><strong>安心して使うためのルール</strong><br><span class=\"small muted\">面談の前に読んでください</span></p></a>\n</div>\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["student/search"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<h1>先輩をさがす</h1>\n<p class=\"lead\"><strong>")
+    ; __append(escapeFn( prefName ))
+    ; __append("</strong>の高校を卒業した大学生です。</p>\n")
+    ;  if (stats) { 
+    ; __append("\n  <div class=\"notice notice-info small\">\n    <p>")
+    ; __append(escapeFn( prefName ))
+    ; __append("からは毎年約<strong>")
+    ; __append(escapeFn( lib.roundHundreds(stats.outside_per_year) ))
+    ; __append("人</strong>が県外の大学に進学し、今も約<strong>")
+    ; __append(escapeFn( lib.roundHundreds(stats.outside_enrolled) ))
+    ; __append("人</strong>の先輩が県外で学んでいます（推計）。<span class=\"muted\">出典：")
+    ; __append(escapeFn( stats.source ))
+    ; __append("</span></p>\n  </div>\n")
+    ;  } 
+    ; __append("\n<form method=\"get\" action=\"/student/search\" class=\"filters panel\" aria-label=\"絞り込み\">\n  <div class=\"field\"><label for=\"pref\">出身県</label>\n    <select id=\"pref\" name=\"pref\">")
+    ;  for (const p of prefs) { 
+    ; __append("<option value=\"")
+    ; __append(escapeFn( p.code ))
+    ; __append("\" ")
+    ; __append(escapeFn( p.code === f.pref ? 'selected' : '' ))
+    ; __append(">")
+    ; __append(escapeFn( p.name ))
+    ; __append(escapeFn( p.code === student.home_pref_code ? '（あなたの県）' : '' ))
+    ; __append("</option>")
+    ;  } 
+    ; __append("</select></div>\n  <div class=\"field\"><label for=\"dest\">進学先</label>\n    <select id=\"dest\" name=\"dest\"><option value=\"all\">すべて</option><option value=\"local\" ")
+    ; __append(escapeFn( f.dest === 'local' ? 'selected' : '' ))
+    ; __append(">地元の大学</option><option value=\"outside\" ")
+    ; __append(escapeFn( f.dest === 'outside' ? 'selected' : '' ))
+    ; __append(">県外の大学</option></select></div>\n  <div class=\"field\"><label for=\"field\">分野</label>\n    <select id=\"field\" name=\"field\"><option value=\"all\">すべて</option>")
+    ;  for (const x of L.FIELDS) { 
+    ; __append("<option ")
+    ; __append(escapeFn( f.field === x ? 'selected' : '' ))
+    ; __append(">")
+    ; __append(escapeFn( x ))
+    ; __append("</option>")
+    ;  } 
+    ; __append("</select></div>\n  <div class=\"field\"><label for=\"schol\">奨学金</label>\n    <select id=\"schol\" name=\"schol\"><option value=\"all\">すべて</option><option value=\"yes\" ")
+    ; __append(escapeFn( f.schol === 'yes' ? 'selected' : '' ))
+    ; __append(">利用している</option><option value=\"no\" ")
+    ; __append(escapeFn( f.schol === 'no' ? 'selected' : '' ))
+    ; __append(">利用していない</option></select></div>\n  <div class=\"field\"><label for=\"hs\">出身高校</label>\n    <select id=\"hs\" name=\"hs\"><option value=\"all\">すべて</option><option ")
+    ; __append(escapeFn( f.hs === '公立' ? 'selected' : '' ))
+    ; __append(">公立</option><option ")
+    ; __append(escapeFn( f.hs === '私立' ? 'selected' : '' ))
+    ; __append(">私立</option></select></div>\n  <div style=\"grid-column:1/-1\"><button class=\"btn\" type=\"submit\">この条件でさがす</button> <span class=\"muted small\" style=\"margin-left:12px\">")
+    ; __append(escapeFn( list.length ))
+    ; __append("人</span></div>\n</form>\n")
+    ;  if (!list.length) { 
+    ; __append("\n  <div class=\"panel\"><p style=\"margin:0\">条件に合う先輩は、まだ登録されていません。条件を広げるか、しばらくしてからもう一度さがしてください。</p></div>\n")
+    ;  } else { 
+    ; __append("\n  <div class=\"cards\">\n    ")
+    ;  const back = '/student/search' + (Object.keys(f).length ? '?' + new URLSearchParams(Object.entries(f).map(([k,v]) => [k, String(v)])).toString() : ''); 
+    ; __append("\n    ")
+    ;  for (const a of list) { 
+    ; __append( include('../partials/person-card', { a, back, inCompare: compare.includes(String(a.id)) }) )
+    ;  } 
+    ; __append("\n  </div>\n")
+    ;  } 
+    ; __append("\n<p class=\"muted small\" style=\"margin-top:24px\">並び順は、あなたの興味のある分野と、予約できる日時があるかで決まります。</p>\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["student/ambassador"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<p class=\"small\"><a href=\"/student/search?pref=")
+    ; __append(escapeFn( a.home_pref_code ))
+    ; __append("\">← 先輩の一覧へ</a></p>\n<div class=\"person-head\" style=\"margin-bottom:8px\">\n  <span class=\"avatar\" aria-hidden=\"true\">")
+    ; __append(escapeFn( a.display_name.slice(0,1) ))
+    ; __append("</span>\n  <div><p class=\"muted\" style=\"margin:0\">")
+    ; __append(escapeFn( a.university ))
+    ; __append("　")
+    ; __append(escapeFn( a.faculty ))
+    ; __append("・")
+    ; __append(escapeFn( a.year ))
+    ; __append("年</p><h1 style=\"margin:0\">")
+    ; __append(escapeFn( a.display_name ))
+    ; __append(" さん</h1></div>\n</div>\n<div class=\"tags\">\n  <span class=\"tag ")
+    ; __append(escapeFn( a.is_local ? 'tag-green' : 'tag-blue' ))
+    ; __append("\">")
+    ; __append(escapeFn( a.is_local ? '地元の大学' : '県外の大学' ))
+    ; __append("</span>\n  <span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.home_pref ))
+    ; __append("出身</span><span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.hs_kind ))
+    ; __append("高校</span><span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.exam_type ))
+    ; __append("</span><span class=\"tag tag-gray\">")
+    ; __append(escapeFn( a.field ))
+    ; __append("</span>\n  <span class=\"tag ")
+    ; __append(escapeFn( a.uses_scholarship ? 'tag-orange' : 'tag-gray' ))
+    ; __append("\">奨学金")
+    ; __append(escapeFn( a.uses_scholarship ? 'あり' : 'なし' ))
+    ; __append("</span>\n</div>\n")
+    ;  if (a.topics) { 
+    ; __append("<p class=\"lead\">話せること：")
+    ; __append(escapeFn( a.topics ))
+    ; __append("</p>")
+    ;  } 
+    ; __append("\n<form method=\"post\" action=\"/student/compare/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\">\n  ")
+    ; __append( include('../partials/csrf') )
+    ; __append("<input type=\"hidden\" name=\"back\" value=\"/student/ambassadors/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\">\n  <button class=\"btn btn-sm btn-secondary\" type=\"submit\">")
+    ; __append(escapeFn( inCompare ? '比較シートから外す' : '比較シートに追加' ))
+    ; __append("</button>\n</form>\n\n<h2>よく聞かれる質問への回答</h2>\n<div class=\"table-wrap\"><table class=\"compare\"><tbody>\n  ")
+    ;  for (const [key, label] of L.QUESTIONS) { 
+    ; __append("<tr><th scope=\"row\">")
+    ; __append(escapeFn( label ))
+    ; __append("</th><td>")
+    ; __append(escapeFn( a.answers[key] || '—' ))
+    ; __append("</td></tr>")
+    ;  } 
+    ; __append("\n</tbody></table></div>\n\n<h2 id=\"book\">面談を予約する（30分・オンライン）</h2>\n")
+    ; __append( include('../partials/error') )
+    ; __append("\n")
+    ;  if (user.status !== 'active') { 
+    ; __append("\n  <div class=\"notice notice-warn\"><p>")
+    ; __append(escapeFn( user.status === 'pending_consent' ? '保護者の方の同意が届くと、予約できるようになります。' : 'メールアドレスの確認が終わると、予約できるようになります。' ))
+    ; __append(" <a href=\"/student\">マイページで確認する</a></p></div>\n")
+    ;  } else if (!slots.length) { 
+    ; __append("\n  <div class=\"panel\"><p style=\"margin:0\">今は予約できる日時がありません。先輩が日時を追加すると、ここに表示されます。</p></div>\n")
+    ;  } else { 
+    ; __append("\n  <form method=\"post\" action=\"/student/ambassadors/")
+    ; __append(escapeFn( a.id ))
+    ; __append("/book\" data-confirm=\"この日時で予約しますか？\">\n    ")
+    ; __append( include('../partials/csrf') )
+    ; __append("\n    <fieldset><legend>日時を選ぶ<span class=\"req\">必須</span></legend>\n      <div class=\"slot-pick\">\n        ")
+    ;  for (const s of slots) { 
+    ; __append("<label><input type=\"radio\" name=\"slot_id\" value=\"")
+    ; __append(escapeFn( s.id ))
+    ; __append("\" ")
+    ; __append(escapeFn( String(form.slot_id) === String(s.id) ? 'checked' : '' ))
+    ; __append(" required><span class=\"num\">")
+    ; __append(escapeFn( lib.formatRange(s.starts_at, s.duration_min) ))
+    ; __append("</span></label>")
+    ;  } 
+    ; __append("\n      </div>\n    </fieldset>\n    <div class=\"field\"><label for=\"question\">聞きたいこと（400文字以内・任意）</label><span class=\"hint\">先輩が準備しやすくなります。連絡先は書けません</span>\n      <textarea id=\"question\" name=\"question\" maxlength=\"400\">")
+    ; __append(escapeFn( form.question || '' ))
+    ; __append("</textarea></div>\n    <button class=\"btn\" type=\"submit\">予約する</button>\n    <p class=\"muted small\" style=\"margin-top:12px\">予約は同時に")
+    ; __append(escapeFn( config.rules.maxActiveBookingsPerStudent ))
+    ; __append("件まで。取り消しは面談の")
+    ; __append(escapeFn( config.rules.cancelDeadlineHours ))
+    ; __append("時間前までです。</p>\n  </form>\n")
+    ;  } 
+    ; __append("\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["student/bookings"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<h1>面談の予約</h1>\n")
+    ;  const label = { booked: ['予約中','tag-blue'], completed: ['実施済み','tag-green'], cancelled_by_student: ['取り消し（あなた）','tag-gray'], cancelled_by_ambassador: ['取り消し（先輩）','tag-gray'], no_show: ['欠席','tag-red'] }; 
+    ; __append("\n")
+    ;  if (!list.length) { 
+    ; __append("\n  <div class=\"panel\"><p>まだ予約はありません。</p><a class=\"btn\" href=\"/student/search\">先輩をさがす</a></div>\n")
+    ;  } else { 
+    ; __append("\n<ul class=\"list\">\n")
+    ;  for (const b of list) { const start = new Date(b.starts_at).getTime(); const end = start + b.duration_min * 60000; 
+    ; __append("\n  <li class=\"booking\">\n    <div>\n      <span class=\"tag ")
+    ; __append(escapeFn( label[b.status][1] ))
+    ; __append("\">")
+    ; __append(escapeFn( label[b.status][0] ))
+    ; __append("</span>\n      <p class=\"when\" style=\"margin:4px 0 0\">")
+    ; __append(escapeFn( lib.formatRange(b.starts_at, b.duration_min) ))
+    ; __append("</p>\n      <p style=\"margin:0\"><a href=\"/student/ambassadors/")
+    ; __append(escapeFn( b.ambassador_id ))
+    ; __append("\">")
+    ; __append(escapeFn( b.university ))
+    ; __append(" ")
+    ; __append(escapeFn( b.faculty ))
+    ; __append("　")
+    ; __append(escapeFn( b.display_name ))
+    ; __append(" さん</a></p>\n      ")
+    ;  if (b.question) { 
+    ; __append("<p class=\"small muted\" style=\"margin:4px 0 0\">聞きたいこと：")
+    ; __append(escapeFn( b.question ))
+    ; __append("</p>")
+    ;  } 
+    ; __append("\n      ")
+    ;  if (b.status === 'completed' && !b.rating) { 
+    ; __append("\n        <form method=\"post\" action=\"/student/bookings/")
+    ; __append(escapeFn( b.id ))
+    ; __append("/feedback\" class=\"card\" style=\"margin-top:12px\">\n          ")
+    ; __append( include('../partials/csrf') )
+    ; __append("\n          <fieldset style=\"margin-bottom:12px\"><legend>面談はどうでしたか？</legend><div class=\"choices\">\n            ")
+    ;  for (const [v, t] of [[5,'とても役に立った'],[4,'役に立った'],[3,'ふつう'],[2,'あまり'],[1,'役に立たなかった']]) { 
+    ; __append("<label class=\"choice\"><input type=\"radio\" name=\"rating\" value=\"")
+    ; __append(escapeFn( v ))
+    ; __append("\" required>")
+    ; __append(escapeFn( t ))
+    ; __append("</label>")
+    ;  } 
+    ; __append("\n          </div></fieldset>\n          <div class=\"field\"><label for=\"c")
+    ; __append(escapeFn( b.id ))
+    ; __append("\">ひとこと（任意）</label><textarea id=\"c")
+    ; __append(escapeFn( b.id ))
+    ; __append("\" name=\"comment\" maxlength=\"400\"></textarea></div>\n          <button class=\"btn btn-sm\" type=\"submit\">感想を送る</button>\n        </form>\n      ")
+    ;  } else if (b.rating) { 
+    ; __append("<p class=\"small muted\" style=\"margin:4px 0 0\">感想を送りました（満足度 ")
+    ; __append(escapeFn( b.rating ))
+    ; __append("/5）</p>")
+    ;  } 
+    ; __append("\n      <details><summary>困ったことを報告</summary>\n        <form method=\"post\" action=\"/student/bookings/")
+    ; __append(escapeFn( b.id ))
+    ; __append("/report\">\n          ")
+    ; __append( include('../partials/csrf') )
+    ; __append("\n          <div class=\"field\"><label for=\"r")
+    ; __append(escapeFn( b.id ))
+    ; __append("\">理由</label><select id=\"r")
+    ; __append(escapeFn( b.id ))
+    ; __append("\" name=\"reason\" required><option value=\"\">選んでください</option>")
+    ;  for (const r of L.REPORT_REASONS) { 
+    ; __append("<option>")
+    ; __append(escapeFn( r ))
+    ; __append("</option>")
+    ;  } 
+    ; __append("</select></div>\n          <div class=\"field\"><label for=\"d")
+    ; __append(escapeFn( b.id ))
+    ; __append("\">くわしく（任意）</label><textarea id=\"d")
+    ; __append(escapeFn( b.id ))
+    ; __append("\" name=\"detail\" maxlength=\"1000\"></textarea></div>\n          <button class=\"btn btn-sm btn-secondary\" type=\"submit\">運営事務局に報告する</button>\n        </form>\n      </details>\n    </div>\n    <div>\n      ")
+    ;  if (b.status === 'booked') { 
+    ; __append("\n        ")
+    ;  if (now >= start - 15 * 60000 && now <= end + 30 * 60000) { 
+    ; __append("\n          <a class=\"btn\" href=\"")
+    ; __append(escapeFn( b.meeting_url ))
+    ; __append("\" target=\"_blank\" rel=\"noopener noreferrer\">面談に入る</a>\n        ")
+    ;  } else if (now < start) { 
+    ; __append("\n          <p class=\"small muted\" style=\"margin:0 0 8px\">開始15分前から「面談に入る」ボタンが出ます</p>\n        ")
+    ;  } 
+    ; __append("\n        ")
+    ;  if (start - now > config.rules.cancelDeadlineHours * 3600e3) { 
+    ; __append("\n          <form method=\"post\" action=\"/student/bookings/")
+    ; __append(escapeFn( b.id ))
+    ; __append("/cancel\" data-confirm=\"この予約を取り消しますか？\">")
+    ; __append( include('../partials/csrf') )
+    ; __append("<button class=\"btn btn-sm btn-danger\" type=\"submit\">予約を取り消す</button></form>\n        ")
+    ;  } 
+    ; __append("\n      ")
+    ;  } 
+    ; __append("\n    </div>\n  </li>\n")
+    ;  } 
+    ; __append("\n</ul>\n")
+    ;  } 
+    ; __append("\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["student/compare"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<h1>比較シート</h1>\n<p class=\"lead\">先輩たちの回答を、同じ項目で並べています（最大")
+    ; __append(escapeFn( config.rules.maxCompare ))
+    ; __append("人）。</p>\n")
+    ;  if (!list.length) { 
+    ; __append("\n  <div class=\"panel\"><p>まだ誰も追加されていません。先輩の一覧で「比較に追加」を押してください。</p><a class=\"btn\" href=\"/student/search\">先輩をさがす</a></div>\n")
+    ;  } else { 
+    ; __append("\n<div class=\"table-wrap\"><table class=\"compare\">\n  <thead><tr><th scope=\"col\">項目</th>")
+    ;  for (const a of list) { 
+    ; __append("<th scope=\"col\"><a href=\"/student/ambassadors/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\">")
+    ; __append(escapeFn( a.display_name ))
+    ; __append(" さん</a><br><span class=\"small muted\" style=\"font-weight:400\">")
+    ; __append(escapeFn( a.university ))
+    ; __append("</span></th>")
+    ;  } 
+    ; __append("</tr></thead>\n  <tbody>\n    <tr><th scope=\"row\">進学先</th>")
+    ;  for (const a of list) { 
+    ; __append("<td><span class=\"tag ")
+    ; __append(escapeFn( a.is_local ? 'tag-green' : 'tag-blue' ))
+    ; __append("\">")
+    ; __append(escapeFn( a.is_local ? '地元の大学' : '県外の大学' ))
+    ; __append("</span></td>")
+    ;  } 
+    ; __append("</tr>\n    <tr><th scope=\"row\">学部・学年</th>")
+    ;  for (const a of list) { 
+    ; __append("<td>")
+    ; __append(escapeFn( a.faculty ))
+    ; __append("・")
+    ; __append(escapeFn( a.year ))
+    ; __append("年</td>")
+    ;  } 
+    ; __append("</tr>\n    <tr><th scope=\"row\">出身高校・入試</th>")
+    ;  for (const a of list) { 
+    ; __append("<td>")
+    ; __append(escapeFn( a.hs_kind ))
+    ; __append("高校／")
+    ; __append(escapeFn( a.exam_type ))
+    ; __append("</td>")
+    ;  } 
+    ; __append("</tr>\n    <tr><th scope=\"row\">奨学金</th>")
+    ;  for (const a of list) { 
+    ; __append("<td>")
+    ; __append(escapeFn( a.uses_scholarship ? '利用している' : '利用していない' ))
+    ; __append("</td>")
+    ;  } 
+    ; __append("</tr>\n    ")
+    ;  for (const [key, label] of L.QUESTIONS) { 
+    ; __append("<tr><th scope=\"row\">")
+    ; __append(escapeFn( label ))
+    ; __append("</th>")
+    ;  for (const a of list) { 
+    ; __append("<td>")
+    ; __append(escapeFn( a.answers[key] || '—' ))
+    ; __append("</td>")
+    ;  } 
+    ; __append("</tr>")
+    ;  } 
+    ; __append("\n    <tr><th scope=\"row\"></th>")
+    ;  for (const a of list) { 
+    ; __append("<td>\n      <a class=\"btn btn-sm\" href=\"/student/ambassadors/")
+    ; __append(escapeFn( a.id ))
+    ; __append("#book\">予約する</a>\n      <form method=\"post\" action=\"/student/compare/")
+    ; __append(escapeFn( a.id ))
+    ; __append("\" style=\"margin-top:8px\">")
+    ; __append( include('../partials/csrf') )
+    ; __append("<input type=\"hidden\" name=\"back\" value=\"/student/compare\"><button class=\"link-btn small\" type=\"submit\">外す</button></form>\n    </td>")
+    ;  } 
+    ; __append("</tr>\n  </tbody>\n</table></div>\n")
+    ;  } 
+    ; __append("\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["public/guidelines"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<article class=\"narrow doc\">\n  <h1>安心して使うためのルール</h1>\n  <p class=\"lead\">高校生も先輩も、気持ちよく話せるように。面談の前に読んでください。</p>\n  <div class=\"split\">\n    <div class=\"card\">\n      <h2 style=\"margin-top:0\">高校生のみなさんへ</h2>\n      <ul>\n        <li>電話番号・メールアドレス・SNSのIDは教えないでください。聞かれても答えなくて大丈夫です。</li>\n        <li>面談は、予約画面の「面談に入る」から入る部屋だけで行います。</li>\n        <li>いやな気持ちになったら、すぐに通話を終えてかまいません。予約画面の「困ったことを報告」から運営に知らせてください。</li>\n        <li>先輩の話は一人の経験です。何人かの話を比較シートで見くらべてみましょう。</li>\n      </ul>\n    </div>\n    <div class=\"card\">\n      <h2 style=\"margin-top:0\">先輩のみなさんへ</h2>\n      <ul>\n        <li>相手は高校生（未成年）です。連絡先の交換、外で会う約束、個人的なやりとりは禁止です。</li>\n        <li>自分の大学や特定の塾・団体への勧誘はしないでください。</li>\n        <li>録音・録画・撮影はしないでください。</li>\n        <li>わからないことは「わからない」と伝え、学校の先生や公式の情報も確かめるよう伝えてください。</li>\n        <li>心配なこと（家庭の悩み、心身の不調など）を打ち明けられたら、一人で抱えずに運営に報告してください。</li>\n      </ul>\n    </div>\n  </div>\n  <h2>運営事務局の対応</h2>\n  <p>報告はすべて運営事務局が確認し、必要に応じてアカウントの停止などの対応をとります。緊急の場合は、学校や保護者の方とも連携します。</p>\n  <p>問い合わせ：")
+    ; __append(escapeFn( config.operatorContact ))
+    ; __append("</p>\n</article>\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+T["public/message"] = function (locals, escapeFn, include) { var __output = ''; function __append(s) { if (s !== undefined && s !== null) __output += s; } with (locals || {}) {
+    ; __append( include('../partials/head') )
+    ; __append("\n<div class=\"narrow\">\n  <h1>")
+    ; __append(escapeFn( title ))
+    ; __append("</h1>\n  <div class=\"notice notice-success\"><p>")
+    ; __append(escapeFn( message ))
+    ; __append("</p></div>\n  ")
+    ;  if (typeof link !== 'undefined' && link) { 
+    ; __append("<p><a class=\"btn\" href=\"")
+    ; __append(escapeFn( link ))
+    ; __append("\">")
+    ; __append(escapeFn( linkText ))
+    ; __append("</a></p>")
+    ;  } 
+    ; __append("\n</div>\n")
+    ; __append( include('../partials/foot') )
+    ; __append("\n")
+
+} return __output; };
+
+/* ===== 見本版の動き：本番の src/routes/student.js と同じルールを、ブラウザの中のデータで動かす ===== */
+(function () {
+  'use strict';
+
+  /* ---------- 本番の src/lib.js と同じ定数・関数 ---------- */
+  var L = {
+    QUESTIONS: [['cost', '1か月の生活費'], ['housing', '住まい'], ['commute', '通学'], ['classes', '授業の雰囲気'], ['exam', '入試方式と準備'], ['scholarship', '奨学金'], ['advice', '高校時代にしておけばよかったこと']],
+    FIELDS: ['経営・経済', '法律・政治', '文学・語学', '教育', '社会・メディア', '国際', '理学', '工学', '情報', '農学', '医療・看護・福祉', '芸術・スポーツ'],
+    EXAM_TYPES: ['一般選抜', '学校推薦型選抜', '総合型選抜', 'その他'],
+    REPORT_REASONS: ['連絡先や個人的なやりとりを求められた', '不快な言動があった', '面談に来なかった', '内容が事実と違う', 'その他'],
+  };
+  var CONTACT = [/[\w.+-]+@[\w-]+\.[\w.-]+/, /(?:\d[\s\-‐ー−]?){10,11}/, /https?:\/\//i,
+    /\bline\s*(?:id)?\b|ライン\s*(?:id|ＩＤ)|インスタ|instagram|twitter|ツイッター|x\.com|tiktok|discord|kakao/i, /(?:^|\s)@[A-Za-z0-9_.]{3,}/];
+  L.containsContactInfo = function (t) { if (!t) return false; var n = t.normalize('NFKC'); return CONTACT.some(function (re) { return re.test(n); }); };
+  var TZ = 'Asia/Tokyo';
+  L.formatDateTime = function (d) {
+    var parts = new Intl.DateTimeFormat('ja-JP', { timeZone: TZ, month: 'numeric', day: 'numeric', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(d));
+    var g = function (t) { var p = parts.find(function (x) { return x.type === t; }); return p ? p.value : ''; };
+    return g('month') + '月' + g('day') + '日（' + g('weekday') + '）' + g('hour') + ':' + g('minute');
+  };
+  L.formatRange = function (start, minutes) {
+    var end = new Date(new Date(start).getTime() + minutes * 60000);
+    return L.formatDateTime(start) + '〜' + new Intl.DateTimeFormat('ja-JP', { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }).format(end);
+  };
+  L.roundHundreds = function (n) { return (Math.round(n / 100) * 100).toLocaleString('ja-JP'); };
+
+  var config = {
+    serviceName: 'キャンパスマッチナビ', operatorContact: '運営事務局（見本版のため連絡先はありません）',
+    rules: { maxActiveBookingsPerStudent: 3, minHoursBeforeBooking: 24, cancelDeadlineHours: 3, maxCompare: 3 },
+  };
+  var SOURCE = '文部科学省「学校基本統計（令和3年度）」に基づく調査研究より推計（県外の大学への進学者数×4学年）';
+  var STATS = { 3: [3200, 12800], 5: [2465, 9861], 20: [7380, 29500], 32: [2270, 9100], 46: [4070, 16300] };
+  var UNIS = { hosei: ['法政大学', 13], chuo: ['中央大学', 13], kansai: ['関西大学', 27], akita: ['秋田大学', 5], apu: ['秋田県立大学', 5] };
+  var PREFNAME = {}; PREFS.forEach(function (p) { PREFNAME[p.code] = p.name; });
+
+  /* ---------- 見本のデータ（毎回この状態から始まる） ---------- */
+  function ans(cost, housing, commute, classes, exam, scholarship, advice) { return { cost: cost, housing: housing, commute: commute, classes: classes, exam: exam, scholarship: scholarship, advice: advice }; }
+  var AMB_SEED = [
+    { id: 11, display_name: 'はると', uni: 'hosei', faculty: '経営学部 経営学科', year: 3, home: 5, hs_kind: '公立', exam_type: '一般選抜', uses_scholarship: true, field: '経営・経済', topics: '一人暮らしの始め方、奨学金とアルバイトの両立',
+      answers: ans('家賃6.5万円を含めて月11万円ほど。仕送りと奨学金とアルバイトでまかなっています。', '大学まで電車で25分のワンルーム。1年目は学生寮でした。', '電車で25分。定期代は月7,000円ほど。', '1年生は大人数の講義が中心、2年生から少人数のゼミ。', '高3の夏から過去問を10年分。英語は毎日長文1題。', '貸与型（第二種）を月5万円。返済は卒業後に始まります。', '一人暮らしにかかるお金を、家族と早めに話しておけばよかった。'), times: [[2, 19, 0], [9, 19, 0], [16, 19, 0]] },
+    { id: 12, display_name: 'みお', uni: 'chuo', faculty: '法学部 法律学科', year: 2, home: 5, hs_kind: '公立', exam_type: '学校推薦型選抜', uses_scholarship: false, field: '法律・政治', topics: '推薦入試の準備、東京での生活',
+      answers: ans('寮費込みで月9万円ほど。', '女子学生寮（食事つき）。', 'バスで15分。', '法律の基礎科目が多く、予習が大事。', '評定を保ちつつ、小論文を先生に毎週見てもらいました。', '利用していません。', '自分の住む地域の課題を調べておくと、面接で話せました。'), times: [[3, 20, 0], [10, 20, 0]] },
+    { id: 13, display_name: 'そうた', uni: 'akita', faculty: '理工学部', year: 4, home: 5, hs_kind: '公立', exam_type: '総合型選抜', uses_scholarship: true, field: '工学', topics: '地元に残る選択、研究室のこと',
+      answers: ans('実家から通っているので、月3万円ほど（交通費・昼食）。', '実家。', '車で30分。', '実験とレポートが多い。研究室は少人数。', '活動実績をまとめ、面接の練習を重ねました。', '給付型を月2万円。', '地元の企業で何ができるか、早めに調べておけばよかった。'), times: [[4, 18, 30], [11, 18, 30]] },
+    { id: 14, display_name: 'ゆい', uni: 'kansai', faculty: '総合情報学部', year: 2, home: 5, hs_kind: '私立', exam_type: '一般選抜', uses_scholarship: false, field: '情報', topics: 'プログラミング未経験からの大学生活、関西での一人暮らし',
+      answers: ans('家賃5万円を含めて月9万円ほど。', '大学まで自転車で10分のワンルーム。', '自転車で10分。', 'プログラミングの演習が多く、チームで作る授業もある。', '共通テスト利用と一般入試を併用しました。', '利用していません。', 'パソコンのタイピングに慣れておけばよかった。'), times: [[5, 21, 0], [12, 21, 0]] },
+    { id: 15, display_name: 'りく', uni: 'apu', faculty: '生物資源科学部', year: 1, home: 5, hs_kind: '公立', exam_type: '学校推薦型選抜', uses_scholarship: true, field: '農学', topics: '県内の大学の実習、推薦入試の面接',
+      answers: ans('実家から通っていて、月2万円ほど。', '実家。', '電車とバスで50分。', '1年生から農場での実習がある。', '志望理由書を学校の先生と5回書き直しました。', '給付型（修学支援新制度）を利用。', '地元の大学のオープンキャンパスにも早めに行けばよかった。'), times: [[6, 17, 0]] },
+    { id: 16, display_name: 'いちか', uni: 'hosei', faculty: '社会学部', year: 3, home: 3, hs_kind: '公立', exam_type: '総合型選抜', uses_scholarship: true, field: '社会・メディア', topics: '岩手から東京へ、メディアの勉強',
+      answers: ans('家賃6万円を含めて月10万円ほど。', 'ワンルーム。', '電車で30分。', 'フィールドワークで地域に出る授業が多い。', '高2から地域の活動に参加し、その経験を書きました。', '貸与型を月4万円。', '帰省の交通費も計算しておけばよかった。'), times: [[3, 19, 30], [10, 19, 30]] },
+  ];
+
+  function jstAt(daysAhead, h, m) {
+    var now = new Date();
+    var ymd = new Intl.DateTimeFormat('sv-SE', { timeZone: TZ }).format(new Date(now.getTime() + daysAhead * 86400000));
+    return new Date(ymd + 'T' + String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0') + ':00+09:00');
+  }
+
+  var S;
+  function seed() {
+    S = { ambassadors: {}, slots: [], bookings: [], feedback: {}, compare: [12], nextId: 100, flash: null };
+    AMB_SEED.forEach(function (a) {
+      S.ambassadors[a.id] = a;
+      a.times.forEach(function (t) { S.slots.push({ id: S.nextId++, ambassador_id: a.id, starts_at: jstAt(t[0], t[1], t[2]).toISOString(), duration_min: 30, status: 'open' }); });
+    });
+    // 2週間前に実施済みの面談（感想を送れる状態）
+    var past = { id: S.nextId++, ambassador_id: 12, starts_at: jstAt(-14, 20, 0).toISOString(), duration_min: 30, status: 'booked' };
+    S.slots.push(past);
+    S.bookings.push({ id: S.nextId++, slot_id: past.id, ambassador_id: 12, question: '推薦入試の面接でどんなことを聞かれましたか。', status: 'completed' });
+  }
+  seed();
+
+  var user = { id: 1, display_name: 'あおい', email: 'aoi@example.jp', role: 'student', status: 'active' };
+  var student = { school_name: '秋田県立〇〇高等学校', grade: 3, home_pref_code: 5, home_pref: '秋田県', fields: ['経営・経済', '情報'] };
+
+  /* ---------- 本番と同じ形のデータを作る ---------- */
+  function ambRow(a) {
+    var u = UNIS[a.uni];
+    return { id: a.id, display_name: a.display_name, faculty: a.faculty, year: a.year, hs_kind: a.hs_kind, exam_type: a.exam_type, uses_scholarship: a.uses_scholarship,
+      field: a.field, topics: a.topics, home_pref_code: a.home, home_pref: PREFNAME[a.home], university: u[0], uni_pref_code: u[1], is_local: u[1] === a.home, answers: a.answers };
+  }
+  function slotById(id) { return S.slots.find(function (s) { return String(s.id) === String(id); }); }
+  function openSlots(ambId) {
+    var min = Date.now() + config.rules.minHoursBeforeBooking * 3600e3;
+    return S.slots.filter(function (s) { return s.ambassador_id === Number(ambId) && s.status === 'open' && new Date(s.starts_at).getTime() > min; })
+      .sort(function (a, b) { return new Date(a.starts_at) - new Date(b.starts_at); });
+  }
+  function bookingRows() {
+    return S.bookings.map(function (b) {
+      var s = slotById(b.slot_id); var a = ambRow(S.ambassadors[b.ambassador_id]); var f = S.feedback[b.id];
+      return { id: b.id, status: b.status, question: b.question, meeting_url: '#', starts_at: s.starts_at, duration_min: s.duration_min,
+        display_name: a.display_name, university: a.university, faculty: a.faculty, ambassador_id: a.id, rating: f ? f.rating : null };
+    }).sort(function (x, y) { return new Date(y.starts_at) - new Date(x.starts_at); });
+  }
+  function activeCount() {
+    return S.bookings.filter(function (b) { return b.status === 'booked' && new Date(slotById(b.slot_id).starts_at).getTime() > Date.now(); }).length;
+  }
+
+  /* ---------- 描画 ---------- */
+  function escapeFn(v) {
+    return String(v === undefined || v === null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&#34;', "'": '&#39;' }[c]; });
+  }
+  function resolve(from, rel) {
+    var parts = from.split('/'); parts.pop();
+    rel.replace(/\.ejs$/, '').split('/').forEach(function (p) { if (p === '..') parts.pop(); else if (p !== '.') parts.push(p); });
+    return parts.join('/');
+  }
+  function renderTemplate(name, locals) {
+    var fn = T[name];
+    if (!fn) throw new Error('テンプレートがありません: ' + name);
+    return fn(locals, escapeFn, function (rel, data) {
+      var merged = Object.assign({}, locals, data || {});
+      return renderTemplate(resolve(name, rel), merged);
+    });
+  }
+  var current = { path: '/student', query: {} };
+  function show(name, locals) {
+    var base = { config: config, lib: L, L: L, user: user, csrf: 'demo', path: current.path, flash: S.flash, error: null };
+    S.flash = null;
+    document.getElementById('app').innerHTML = renderTemplate(name, Object.assign(base, locals));
+  }
+  function flash(type, text) { S.flash = { type: type, text: text }; }
+
+  /* ---------- 画面（GET） ---------- */
+  var routes = {
+    '/student': function () {
+      var upcoming = bookingRows().filter(function (b) { return b.status === 'booked' && new Date(b.starts_at).getTime() > Date.now() - 3600e3; })
+        .sort(function (x, y) { return new Date(x.starts_at) - new Date(y.starts_at); }).slice(0, 3);
+      show('student/home', { title: 'マイページ', student: student, upcoming: upcoming });
+    },
+    '/student/search': function (q) {
+      var f = {
+        pref: Number(q.pref) || student.home_pref_code,
+        dest: ['local', 'outside'].indexOf(q.dest) > -1 ? q.dest : 'all',
+        hs: ['公立', '私立'].indexOf(q.hs) > -1 ? q.hs : 'all',
+        schol: ['yes', 'no'].indexOf(q.schol) > -1 ? q.schol : 'all',
+        field: L.FIELDS.indexOf(q.field) > -1 ? q.field : 'all',
+      };
+      var list = Object.keys(S.ambassadors).map(function (k) { return ambRow(S.ambassadors[k]); }).filter(function (a) {
+        return a.home_pref_code === f.pref && (f.dest === 'all' || (f.dest === 'local') === a.is_local) && (f.hs === 'all' || a.hs_kind === f.hs)
+          && (f.schol === 'all' || (f.schol === 'yes') === a.uses_scholarship) && (f.field === 'all' || a.field === f.field);
+      });
+      list.sort(function (a, b) {
+        var fa = student.fields.indexOf(a.field) > -1, fb = student.fields.indexOf(b.field) > -1;
+        if (fa !== fb) return fb - fa;
+        var sa = openSlots(a.id).length > 0, sb = openSlots(b.id).length > 0;
+        if (sa !== sb) return sb - sa;
+        return a.id - b.id;
+      });
+      var st = STATS[f.pref];
+      show('student/search', { title: '先輩をさがす', student: student, prefs: PREFS, f: f, list: list,
+        stats: st ? { outside_per_year: st[0], outside_enrolled: st[1], source: SOURCE } : null,
+        compare: S.compare.map(String), prefName: PREFNAME[f.pref] });
+    },
+    '/student/bookings': function () { show('student/bookings', { title: '面談の予約', list: bookingRows(), now: Date.now() }); },
+    '/student/compare': function () {
+      show('student/compare', { title: '比較シート', list: S.compare.filter(function (id) { return S.ambassadors[id]; }).map(function (id) { return ambRow(S.ambassadors[id]); }) });
+    },
+    '/guidelines': function () { show('public/guidelines', { title: '安心して使うためのルール' }); },
+  };
+  function ambassadorPage(id, extra) {
+    var a = S.ambassadors[id];
+    if (!a) return go('/student/search');
+    show('student/ambassador', Object.assign({ title: UNIS[a.uni][0] + ' ' + a.faculty, a: ambRow(a), slots: openSlots(id), inCompare: S.compare.indexOf(Number(id)) > -1, error: null, form: {} }, extra || {}));
+  }
+  function message(title, text) { show('public/message', { title: title, message: text, link: '/student', linkText: 'マイページへ' }); }
+
+  /* ---------- 操作（POST）：本番の student.js と同じ判定 ---------- */
+  function post(action, body) {
+    var m;
+    if ((m = action.match(/^\/student\/ambassadors\/(\d+)\/book$/))) {
+      var id = Number(m[1]); var question = String(body.question || '').trim(); var slotId = String(body.slot_id || '');
+      var fail = function (msg) { ambassadorPage(id, { error: msg, form: { question: question, slot_id: slotId } }); window.scrollTo(0, document.getElementById('book').offsetTop - 16); };
+      if (!/^\d+$/.test(slotId)) return fail('日時を選んでください。');
+      if (question.length > 400) return fail('聞きたいことは400文字以内にしてください。');
+      if (L.containsContactInfo(question)) return fail('メールアドレス・電話番号・SNSのIDなど、連絡先にあたる内容は書けません。');
+      if (activeCount() >= config.rules.maxActiveBookingsPerStudent) return fail('同時に入れられる予約は' + config.rules.maxActiveBookingsPerStudent + '件までです。面談が終わるか、予約を取り消してから申し込んでください。');
+      var slot = openSlots(id).find(function (s) { return String(s.id) === slotId; });
+      if (!slot) return fail('この日時は予約できなくなりました。別の日時を選んでください。');
+      var dup = S.bookings.some(function (b) { return b.status === 'booked' && slotById(b.slot_id).starts_at === slot.starts_at; });
+      if (dup) return fail('同じ時間に、別の面談の予約があります。');
+      S.bookings.push({ id: S.nextId++, slot_id: slot.id, ambassador_id: id, question: question, status: 'booked' });
+      slot.status = 'booked';
+      var a = ambRow(S.ambassadors[id]);
+      flash('success', '予約しました：' + L.formatRange(slot.starts_at, slot.duration_min) + '　' + a.university + ' ' + a.display_name + '（見本版のため、メールは送られません）');
+      return go('/student/bookings');
+    }
+    if ((m = action.match(/^\/student\/bookings\/(\d+)\/cancel$/))) {
+      var b = S.bookings.find(function (x) { return x.id === Number(m[1]) && x.status === 'booked'; });
+      if (!b) { flash('error', '取り消せる予約が見つかりません。'); return go('/student/bookings'); }
+      var s = slotById(b.slot_id);
+      if (new Date(s.starts_at).getTime() - Date.now() < config.rules.cancelDeadlineHours * 3600e3) { flash('error', '面談の' + config.rules.cancelDeadlineHours + '時間前を過ぎると、取り消せません。'); return go('/student/bookings'); }
+      b.status = 'cancelled_by_student'; s.status = 'open';
+      flash('success', '予約を取り消しました。');
+      return go('/student/bookings');
+    }
+    if ((m = action.match(/^\/student\/bookings\/(\d+)\/feedback$/))) {
+      var rating = Number(body.rating);
+      if (!(rating >= 1 && rating <= 5)) { flash('error', '満足度を選んでください。'); return go('/student/bookings'); }
+      S.feedback[Number(m[1])] = { rating: rating, comment: String(body.comment || '').slice(0, 400) };
+      flash('success', '感想を送りました。ありがとうございました。');
+      return go('/student/bookings');
+    }
+    if ((m = action.match(/^\/student\/bookings\/(\d+)\/report$/))) {
+      if (L.REPORT_REASONS.indexOf(body.reason) < 0) { flash('error', '報告の理由を選んでください。'); return go('/student/bookings'); }
+      flash('success', '運営事務局に報告しました。内容を確認し、必要に応じて対応します。（見本版のため、実際には送られません）');
+      return go('/student/bookings');
+    }
+    if ((m = action.match(/^\/student\/compare\/(\d+)$/))) {
+      var cid = Number(m[1]); var back = String(body.back || '/student/compare');
+      if (back.indexOf('/student') !== 0) back = '/student/compare';
+      var i = S.compare.indexOf(cid);
+      if (i > -1) S.compare.splice(i, 1);
+      else if (S.compare.length >= config.rules.maxCompare) flash('error', '比較シートに入れられるのは' + config.rules.maxCompare + '人までです。ほかの先輩を外してから追加してください。');
+      else if (S.ambassadors[cid]) S.compare.push(cid);
+      return go(back, { keepScroll: true });
+    }
+    if (action === '/logout') { return message('見本版ではログアウトしません', '本番のアプリでは、ここでログアウトします。'); }
+    return message('この操作は見本版にありません', '本番のアプリでは利用できます。');
+  }
+
+  /* ---------- 画面の切り替え ---------- */
+  function parse(url) {
+    var u = new URL(url, 'https://app.invalid');
+    var q = {}; u.searchParams.forEach(function (v, k) { q[k] = v; });
+    return { path: u.pathname.replace(/\/$/, '') || '/', query: q };
+  }
+  function go(url, opts) {
+    var p = parse(url);
+    current = p;
+    var y = window.scrollY;
+    var m = p.path.match(/^\/student\/ambassadors\/(\d+)$/);
+    if (m) ambassadorPage(Number(m[1]));
+    else if (routes[p.path]) routes[p.path](p.query);
+    else if (p.path === '/' || p.path === '/student/') routes['/student']();
+    else if (p.path === '/account') message('アカウント', '本番のアプリでは、ここでパスワードの変更や退会ができます。');
+    else if (p.path === '/terms' || p.path === '/privacy') message(p.path === '/terms' ? '利用規約' : 'プライバシーポリシー', '本番のアプリに掲載しています（見本版では省略）。');
+    else routes['/student']();
+    if (opts && opts.keepScroll) window.scrollTo(0, y);
+    else if (p.query && url.indexOf('#') > -1) { var el = document.getElementById(url.split('#')[1]); if (el) el.scrollIntoView(); }
+    else window.scrollTo(0, 0);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-reset]')) { seed(); go('/student'); return; }
+    var a = e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (href === '#') { e.preventDefault(); return; }
+    if (href.charAt(0) === '/') { e.preventDefault(); go(href); }
+  });
+  document.addEventListener('submit', function (e) {
+    var form = e.target; e.preventDefault();
+    var fd = new FormData(form); var body = {};
+    fd.forEach(function (v, k) { if (k !== '_csrf') body[k] = v; });
+    var action = form.getAttribute('action') || current.path;
+    if ((form.getAttribute('method') || 'get').toLowerCase() === 'get') {
+      var qs = new URLSearchParams(body).toString();
+      return go(action + (qs ? '?' + qs : ''));
+    }
+    post(action, body);
+  });
+
+  go('/student');
+})();
+
+</script>
+</body>
+</html>
